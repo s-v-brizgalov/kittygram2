@@ -9,6 +9,12 @@ class CatViewSet(viewsets.ModelViewSet):
     queryset = Cat.objects.all()
     serializer_class = CatSerializer
 
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def perform_update(self, serializer):
+        achievements = AchievementSerializer(read_only=True, many=True)
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
